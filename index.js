@@ -26,12 +26,22 @@ function switchTab(tab) {
     for(const section of pages){
         section.classList.add('hidden');
     }
+     emptyStat.classList.add("hidden");
     if(tab==='all'){
-        allContainer.classList.remove('hidden')
+           allContainer.classList.remove('hidden');
+        if(allContainer.children.length<1){
+            emptyStat.classList.remove("hidden");
+        }
     }else if(tab==='interview'){
         interviewContainer.classList.remove('hidden');
+           if(interviewContainer.children.length<1){
+            emptyStat.classList.remove("hidden");
+        }
     }else{
-        rejectContainer.classList.remove('hidden')
+            rejectContainer.classList.remove('hidden');
+        if(rejectContainer.children.length<1){
+            emptyStat.classList.remove("hidden");
+        }
     }
     current_tab = tab;
 }
@@ -40,21 +50,44 @@ function switchTab(tab) {
 const totalStat=document.getElementById('state-total')
 const interviewStat=document.getElementById('state-interview')
 const rejectStat=document.getElementById('state-reject')
-totalStat.innerText=allContainer.children.length;
+const emptyStat=document.getElementById('empty');
+
 switchTab(current_tab);
 
 document.getElementById("jobs-container").addEventListener('click',function(event){
     const clickedElement=event.target;
     const card=clickedElement.closest(".card");
-    console.log(card);
+    const status=card.querySelector(".status");
+    const parent=card.parentNode;
 
     if(clickedElement.classList.contains('interview')){
+        status.innerText='Interviewed';
         interviewContainer.append(card);
+        updateStat();
     }
     if(clickedElement.classList.contains('rejected')){
+         status.innerText='Rejected';
         rejectContainer.append(card);
+         updateStat();
     }
     if(clickedElement.classList.contains('delete')){
-        // console.log("Delete clicked")
+       parent.removeChild(card);
+        updateStat();
     }
 })
+
+// Update status
+function updateStat(){
+    // totalStat.innerText=allContainer.children.length;
+    // interviewStat.innerText=interviewContainer.children.length;
+    // rejectStat.innerText=rejectContainer.children.length;
+    const counts={
+        all :allContainer.children.length,
+        interview :interviewContainer.children.length,
+        rejected :rejectContainer.children.length
+    };
+    totalStat.innerText=counts['all']
+    interviewStat.innerText=counts['interview']
+    rejectStat.innerText=counts['rejected']
+}
+updateStat();
