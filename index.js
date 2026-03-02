@@ -42,3 +42,19 @@ const interviewStat=document.getElementById('state-interview')
 const rejectStat=document.getElementById('state-reject')
 totalStat.innerText=allContainer.children.length;
 switchTab(current_tab);
+
+document.getElementById("jobs-container").addEventListener('click',function(event){
+    const clickedElement=event.target;
+    const card=clickedElement.closest(".card");
+    console.log(card);
+
+    if(clickedElement.classList.contains('interview')){
+        interviewContainer.append(card);
+    }
+    if(clickedElement.classList.contains('rejected')){
+        rejectContainer.append(card);
+    }
+    if(clickedElement.classList.contains('delete')){
+        // console.log("Delete clicked")
+    }
+})
