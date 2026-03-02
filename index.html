@@ -52,11 +52,11 @@
                 </div>
                 <div class="flex-1 min-w-28 bg-white rounded-2xl px-6 py-5 shadow-sm">
                     <p class="text-xs text-slate-500 mb-1"> Interview </p>
-                    <p class="font-syne text-4xl font-extrabold text-navy">0 </p>
+                    <p class="font-syne text-4xl font-extrabold text-teal">0 </p>
                 </div>
                 <div class="flex-1 min-w-28 bg-white rounded-2xl px-6 py-5 shadow-sm">
                     <p class="text-xs text-slate-500 mb-1"> Rejected </p>
-                    <p class="font-syne text-4xl font-extrabold text-navy">0 </p>
+                    <p class="font-syne text-4xl font-extrabold text-coral">0 </p>
                 </div>
             </div>
                       <hr class="mb-5 border-slate-400">
@@ -69,15 +69,22 @@
                          <!-- button -->
             <div class="flex flex-wrap gap-2 mb-5">
                 <button
+                id="Tab-all"
+                onclick="switchTab('all')"
                     class="px-5 py-1.5 rounded-[10px] border-2 text-sm font-medium cursor-pointer transition-all duration-200">All</button>
                 <button
+                id="tab-interview"
+                onclick="switchTab('interview')"
                     class="px-5 py-1.5 rounded-[10px] border-2 text-sm font-medium cursor-pointer transition-all duration-200">Interview</button>
                 <button
+                id="Tab-reject"
+                onclick="switchTab('rejected')"
                     class="px-5 py-1.5 rounded-[10px] border-2 text-sm font-medium cursor-pointer transition-all duration-200">Rejected</button>
             </div>
             <!-- Card item -->
             <div id="jobs-container" class="flex flex-col gap-4">
                 <section>
+                    <section class="">
                     <div class="card bg-white rounded-2xl border-2 border-slate-100 px-6 py-5 
                      hover:shadow-lg hover:-translate-y-0.5 transition-all 
                      duration-200 animate-fadeUp">
@@ -110,15 +117,12 @@
                             Build cross-platform mobile applications using React Native.
                             Work on products used by millions of users worldwide.
                         </p>
-
                         <div class="flex flex-wrap gap-2">
-
                             <button class="text-xs font-semibold px-4 py-1.5 rounded-md border-2 border-teal 
            text-teal bg-transparent cursor-pointer transition-all duration-150 
            hover:bg-teal hover:text-white">
                                 Interview
                             </button>
-
                             <button class="text-xs font-semibold px-4 py-1.5 rounded-md border-2 border-coral 
            text-coral bg-transparent cursor-pointer transition-all duration-150 
            hover:bg-coral hover:text-white">
@@ -133,7 +137,7 @@
                 <section class="">Interview section</section>
                 <section class="">reject section</section>
             </div>
-
+</section>
             <!-- empty state -->
              <div id="empty" class="flex-col items-center justify-center py-20 gap-4 text-center">
                 <div class="text-7xl opacity-60"><img src="./jobs.png" alt=""></div>
