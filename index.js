@@ -9,7 +9,7 @@ const rejectContainer=document.getElementById('reject-container')
 
 function switchTab(tab) {
      const tabs = ['all', 'interview', 'rejected'];
-    
+     current_tab = tab;
     for (const t of tabs) {
         const tab_name = document.getElementById("Tab-" + t);
         
@@ -37,7 +37,8 @@ function switchTab(tab) {
            if(interviewContainer.children.length<1){
             emptyStat.classList.remove("hidden");
         }
-    }else{
+    
+   } else if (tab === 'rejected'){
             rejectContainer.classList.remove('hidden');
         if(rejectContainer.children.length<1){
             emptyStat.classList.remove("hidden");
@@ -51,6 +52,7 @@ const totalStat=document.getElementById('state-total')
 const interviewStat=document.getElementById('state-interview')
 const rejectStat=document.getElementById('state-reject')
 const emptyStat=document.getElementById('empty');
+const availableStat=document.getElementById("available");
 
 switchTab(current_tab);
 
@@ -63,31 +65,36 @@ document.getElementById("jobs-container").addEventListener('click',function(even
     if(clickedElement.classList.contains('interview')){
         status.innerText='Interviewed';
         interviewContainer.append(card);
-        updateStat();
+        
     }
     if(clickedElement.classList.contains('rejected')){
          status.innerText='Rejected';
         rejectContainer.append(card);
-         updateStat();
+        
     }
     if(clickedElement.classList.contains('delete')){
        parent.removeChild(card);
-        updateStat();
+        
     }
+     updateStat();
 })
 
 // Update status
 function updateStat(){
-    // totalStat.innerText=allContainer.children.length;
-    // interviewStat.innerText=interviewContainer.children.length;
-    // rejectStat.innerText=rejectContainer.children.length;
     const counts={
         all :allContainer.children.length,
         interview :interviewContainer.children.length,
         rejected :rejectContainer.children.length
     };
-    totalStat.innerText=counts['all']
-    interviewStat.innerText=counts['interview']
-    rejectStat.innerText=counts['rejected']
+       totalStat.innerText=counts.all;
+    interviewStat.innerText=counts['interview'] ;
+    rejectStat.innerText=counts['rejected'];
+    availableStat.innerText=counts[current_tab]
+
+    if(counts[current_tab]<1){
+        emptyStat.classList.remove("hidden");
+    }else{
+        emptyStat.classList.add("hidden");
+    }
 }
 updateStat();
